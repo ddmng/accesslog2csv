@@ -47,6 +47,65 @@ while (<>) {
 
     print STDOUT "\"$host\",\"$logname\",\"$year-$month-$day $hour:$min:$sec\",\"GMT$tz\",\"$method\",\"$url\",$code,$bytesd,\"$referer\"\,\"$ua\"\n";
   } else {
-    print STDERR "Invalid Line at $line_no: $_";
-  }
+    if (/^([\w\.:-]+),\s*([\w\.:-]+),\s*([\w\.:-]+)\s*([\w\.:-]+)\s+([\w\.-]+)\s+\[(\d+)\/(\w+)\/(\d+):(\d+):(\d+):(\d+)\s?([\w:\+-]+)]\s+"(\w+)\s+(\S+)\s+HTTP\/1\.\d"\s+(\d+)\s+([\d-]+)((\s+"([^"]+)"\s+")?([^"]+)")?$/) {
+      $host1 = $1;
+      $host2 = $2;
+      $host3 = $3;
+      $other = $4;
+      $logname = $5;
+      $day = $6;
+      $month = $MONTHS{$7};
+      $year = $8;
+      $hour = $9;
+      $min = $10;
+      $sec = $11;
+      $tz = $12;
+      $method = $13;
+      $url = $14;
+      $code = $15;
+      if ($16 eq '-') {
+        $bytesd = 0;
+      } else {
+        $bytesd = $16;
+      }
+      $referer = $19;
+      $ua = $20;
+
+      print STDOUT "\"$host1\",\"$logname\",\"$year-$month-$day $hour:$min:$sec\",\"GMT$tz\",\"$method\",\"$url\",$code,$bytesd,\"$referer\"\,\"$ua\"\n";
+      print STDOUT "\"$host2\",\"$logname\",\"$year-$month-$day $hour:$min:$sec\",\"GMT$tz\",\"$method\",\"$url\",$code,$bytesd,\"$referer\"\,\"$ua\"\n";
+      print STDOUT "\"$host3\",\"$logname\",\"$year-$month-$day $hour:$min:$sec\",\"GMT$tz\",\"$method\",\"$url\",$code,$bytesd,\"$referer\"\,\"$ua\"\n";
+    } else {
+          if (/^([\w\.:-]+),\s*([\w\.:-]+)\s*([\w\.:-]+)\s+([\w\.-]+)\s+\[(\d+)\/(\w+)\/(\d+):(\d+):(\d+):(\d+)\s?([\w:\+-]+)]\s+"(\w+)\s+(\S+)\s+HTTP\/1\.\d"\s+(\d+)\s+([\d-]+)((\s+"([^"]+)"\s+")?([^"]+)")?$/) {
+      $host1 = $1;
+      $host2 = $2;
+      $other = $3;
+      $logname = $4;
+      $day = $5;
+      $month = $MONTHS{$6};
+      $year = $7;
+      $hour = $8;
+      $min = $9;
+      $sec = $10;
+      $tz = $11;
+      $method = $12;
+      $url = $13;
+      $code = $14;
+      if ($15 eq '-') {
+        $bytesd = 0;
+      } else {
+        $bytesd = $15;
+      }
+      $referer = $18;
+      $ua = $19;
+
+      print STDOUT "\"$host1\",\"$logname\",\"$year-$month-$day $hour:$min:$sec\",\"GMT$tz\",\"$method\",\"$url\",$code,$bytesd,\"$referer\"\,\"$ua\"\n";
+      print STDOUT "\"$host2\",\"$logname\",\"$year-$month-$day $hour:$min:$sec\",\"GMT$tz\",\"$method\",\"$url\",$code,$bytesd,\"$referer\"\,\"$ua\"\n";
+      print STDOUT "\"$host3\",\"$logname\",\"$year-$month-$day $hour:$min:$sec\",\"GMT$tz\",\"$method\",\"$url\",$code,$bytesd,\"$referer\"\,\"$ua\"\n";
+    } else {
+      print STDERR "Invalid Line at $line_no: $_";
+    }
+    }
+  } 
 }
+
+
